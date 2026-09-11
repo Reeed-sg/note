@@ -3,7 +3,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 st.set_page_config(
-    page_title="YURIのマイノート帖",
+    page_title="note壁打ちアプリ",
     page_icon="🧡",
     layout="wide",
 )
