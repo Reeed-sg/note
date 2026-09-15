@@ -247,6 +247,18 @@
 
   .seed-note{ font-size:12px; color:var(--ink); background:var(--accent-soft); border:1px dashed var(--accent-soft-line); border-radius:10px; padding:10px 12px; margin:8px 0 18px; }
 
+  .after-copy{
+    margin-top:26px; padding:16px 18px 18px; background:var(--accent-soft);
+    border:1.5px dashed var(--accent-soft-line); border-radius:14px;
+  }
+  .after-copy-title{ font-size:13px; font-weight:700; color:var(--accent-ink); margin:0 0 10px; font-family:"Klee One"; }
+  .after-copy-steps{ margin:0 0 12px; padding-left:20px; font-size:12.5px; color:var(--ink); line-height:1.8; }
+  .after-copy-prompt{
+    font-size:12px; color:var(--ink); background:var(--paper); border:1px solid var(--paper-edge);
+    border-radius:10px; padding:10px 12px; margin:0 0 10px; line-height:1.7; white-space:pre-wrap;
+  }
+  .after-copy-note{ font-size:11px; color:var(--muted); margin:0; line-height:1.7; }
+
   .qgroup{ display:flex; flex-direction:column; gap:14px; }
   .q{
     display:flex; flex-direction:column; gap:6px;
@@ -363,7 +375,16 @@
       </div>
     </div>
 
-    <p class="welcome">ようこそ🧡　どんな気分で書きたい？　下の①から選んでスタート。書いた内容は右にたまっていって、最後に「写す」でAIに渡せます。</p>
+    <div class="flow">
+      <div class="step"><b>1</b>①で書き方を選ぶ<small>質問から／型から</small></div>
+      <span class="arrow">→</span>
+      <div class="step"><b>2</b>問いに答える<small>構成と素材がたまっていく</small></div>
+      <span class="arrow">→</span>
+      <div class="step"><b>3</b>AIで清書する<small>「写す」→AIに貼って仕上げ</small></div>
+    </div>
+    <p class="flow-note">ここで作れるのは<b>「note記事の構成メモ（骨組みと、書く手がかりになる言葉）」</b>までです。読める記事に仕上げる作業は、最後にAI（ChatGPTなど）に貼ってお願いします（やり方は一番下の「コピーしたあと、どうする？」を参照）。</p>
+
+    <p class="welcome">ようこそ🧡　まずは、どちらの書き方で始める？　下の①から選んでスタート。書いた内容は右にたまっていって、最後に「写す」でAIに渡せます。</p>
 
     <div id="tabs">
       <div class="stage">
@@ -372,6 +393,7 @@
           <button class="segbtn" data-tab="light"><b>📝 質問から書く</b><small>かんたん・15の問いかけ</small></button>
           <button class="segbtn" data-tab="type"><b>✨ 売れる型から書く</b><small>10のかたちから選ぶ</small></button>
         </div>
+        <p class="tab-note">迷ったら：書きたいテーマがまだ曖昧な人 → <b>質問から書く</b>／テーマや伝えたい結論がもう決まっている人 → <b>売れる型から書く</b></p>
       </div>
       <div class="stage">
         <div class="stage-label">② 有料にする？無料のまま？　<span class="stage-hint">任意</span></div>
@@ -379,6 +401,7 @@
           <button class="tab" data-tab="paid"><b>💰 有料パートを作る</b><small>7の橋渡し</small></button>
           <button class="tab" data-tab="deep"><b>🔍 もっと深掘りする</b><small>任意・4問</small></button>
         </nav>
+        <p class="tab-note">無料記事は「思いや気づき」を丸ごと届ける記事、有料記事は「読者が自分で再現できる、具体的なやり方やテンプレート」を渡す記事です。💰を選ぶと、その中身を引き出す7つの質問が追加されます。<b>迷ったら、まずは無料のままでOK。</b>あとからいつでも追加できます。</p>
       </div>
     </div>
     <p class="tab-note">②に何も書かなければ、そのまま<b>無料記事</b>として使えます。タブを切り替えても書いた内容は消えません。<b>✓</b>が付いたところは保存済みです。</p>
@@ -401,6 +424,17 @@
         <button class="fbtn danger" id="resetBtn">白紙に戻す</button>
       </div>
     </footer>
+
+    <div class="after-copy">
+      <div class="after-copy-title">📋 コピーしたあと、どうする？</div>
+      <ol class="after-copy-steps">
+        <li>ChatGPTやClaudeなど、使い慣れたAIチャットを開く</li>
+        <li>コピーした内容を貼り付けて、下のようなお願いを一緒に送る</li>
+        <li>出てきた文章に、<b>自分にしか書けない体験や言葉</b>を足して仕上げる</li>
+      </ol>
+      <div class="after-copy-prompt">これは私がnoteの構成メモとして書いたものです。この骨組みと言葉をもとに、丁寧だけど親しみのある文章のnote記事に仕上げてください。タイトルは本文の内容とズレないように、複数案ください。</div>
+      <p class="after-copy-note">※ 出てきた下書きは、タイトルと本文がズレていたり、体験談が一般的すぎたりすることがあります。必ず自分の言葉・エピソードに書き換えてから使ってください。</p>
+    </div>
 
   </div>
 </div>
@@ -1105,8 +1139,8 @@ const DATA = {
     },
     {
       "k": "story",
-      "label": "もう一場面、見せられるエピソードは？",
-      "why": "主張の直後に置く<em>もう一つの裏付け</em>になる。",
+      "label": "その主張を裏づける、もう一つの場面は？",
+      "why": "本文で伝えたいこと（結論・主張）のすぐ後に、<em>別の裏付けエピソード</em>として差し込みます。上の3問とは別の、もう一つの具体的な場面や誰かの言葉があれば書いてください。",
       "ph": "例：読者から届いた一言。『あなたの作品のおかげで、自分も一歩踏み出せそうです』とだけあった"
     }
   ],
